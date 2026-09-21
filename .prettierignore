@@ -1,0 +1,5 @@
+node_modules/
+gen/
+*.cds
+@cds-models/
+package-lock.json

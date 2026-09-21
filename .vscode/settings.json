@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+
+  // JS/JSON/Markdown -> Prettier (resolved from the project's node_modules)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // .cds files -> CAP's own cds-prettier, shipped in the SAP CDS extension.
+  // Prettier does not understand CDL/CQL, so it must never touch these.
+  "[cds]": {
+    "editor.defaultFormatter": "SAPSE.vscode-cds"
+  },
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
+}
