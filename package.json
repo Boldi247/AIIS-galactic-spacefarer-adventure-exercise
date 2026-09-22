@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@sap/cds": "^10",
+    "lodash-es": "^4.18.1",
     "resend": "^6.28.1"
   },
   "devDependencies": {

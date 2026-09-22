@@ -1,4 +1,5 @@
 import cds from '@sap/cds'
+import { isNil } from 'lodash-es'
 import { sendEmailNotification } from './lib/notifications.js'
 import { isValidEmail } from './lib/validators.js'
 
@@ -16,10 +17,10 @@ export default cds.service.impl(function () {
      */
     if (s.wormholeNavigationSkill > 5 || s.wormholeNavigationSkill < 0)
       return req.reject(400, 'Wormhole navigation skill must be between 0 and 5!')
-    if (s.wormholeNavigationSkill === null || s.wormholeNavigationSkill === 0) s.wormholeNavigationSkill = 1
+    if (isNil(s.wormholeNavigationSkill) || s.wormholeNavigationSkill === 0) s.wormholeNavigationSkill = 1
 
     if (s.stardustCollection < 0) return req.reject(400, 'Stardust collection cannot be negative!')
-    if (s.stardustCollection == null) s.stardustCollection = 0
+    if (isNil(s.stardustCollection)) s.stardustCollection = 0
 
     // Welcome the new spacefarer with a small stardust collection to start their journey.
     s.stardustCollection += 100
