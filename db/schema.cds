@@ -7,6 +7,7 @@ using {
 
 entity Spacefarers : cuid, managed {
     name                    : String(100);
+    email                   : String(100);
     originPlanet            : String(100);
     spaceSuitColor          : String(50);
     stardustCollection      : Integer;

@@ -1,7 +1,8 @@
 ### Variables
 @host = http://localhost:4004
 @service = {{host}}/odata/v4/spacefarer
-@spacefarerId = af9dcb0f-b832-404f-8cf3-4a102d69c5a4
+@spacefarerId = c2ec4268-6aae-4347-92ea-be7712f0976d
+@email = YOUR_EMAIL_HERE
 
 ### Get all spacefarers
 GET {{service}}/Spacefarers
@@ -18,6 +19,7 @@ Content-Type: application/json
 
 {
   "name": "Han Solo",
+  "email": "{{email}}",
   "originPlanet": "Corellia",
   "spaceSuitColor": "brown",
   "stardustCollection": 10,

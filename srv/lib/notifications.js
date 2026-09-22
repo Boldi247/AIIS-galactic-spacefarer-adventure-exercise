@@ -27,13 +27,21 @@ export async function sendEmailNotification(spacefarer) {
 
   const { data } = await resend.emails.send({
     from: EMAIL_FROM,
-    to: 'kovacs.boldizsar0321@gmail.com',
+    to: spacefarer.email,
     subject: 'Welcome to the Galactic Spacefarer Adventure!',
-    text:
-      `Dear ${spacefarer.name},\n\n` +
-      `Welcome to the Galactic Spacefarer Adventure! We are thrilled to have you on board as a spacefarer.\n\n` +
-      `Your journey begins with a basic wormhole navigation skill level of ${spacefarer.wormholeNavigationSkill} and a stardust collection of ${spacefarer.stardustCollection}.\n\n` +
-      `Remember to pick up your ${spacefarer.spaceSuitColor} colored space suit before embarking on your interstellar journey!`,
+    html: `
+      <div style="font-family: sans-serif; max-width: 480px; margin: auto;">
+        <h1 style="color: #1a1a2e;">Welcome aboard, ${spacefarer.name}!</h1>
+        <p>Welcome to the Galactic Spacefarer Adventure! We are thrilled to have you on board as a spacefarer.</p>
+        <p>You have been given a set of initial resources to start your journey, see the list below:</p>
+        <ul>
+          <li><strong>Wormhole navigation skill:</strong> ${spacefarer.wormholeNavigationSkill}</li>
+          <li><strong>Stardust collection:</strong> ${spacefarer.stardustCollection}</li>
+          <li><strong>Spacesuit color:</strong> ${spacefarer.spaceSuitColor}</li>
+        </ul>
+        <p>Fly safe, ${spacefarer.name}.</p>
+      </div>
+    `,
   })
 
   return data
