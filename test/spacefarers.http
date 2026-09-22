@@ -1,0 +1,39 @@
+### Variables
+@host = http://localhost:4004
+@service = {{host}}/odata/v4/spacefarer
+@spacefarerId = 23319241-849d-466e-83d7-10f76b50ed00
+
+### Get all spacefarers
+GET {{service}}/Spacefarers
+Authorization: Basic alice
+
+### Get a single spacefarer by ID
+GET {{service}}/Spacefarers({{spacefarerId}})
+Authorization: Basic alice
+
+### Create a new spacefarer
+POST {{service}}/Spacefarers
+Authorization: Basic alice
+Content-Type: application/json
+
+{
+  "name": "Han Solo",
+  "originPlanet": "Corellia",
+  "spaceSuitColor": "brown",
+  "stardustCollection": 10,
+  "wormholeNavigationSkill": 4
+}
+
+### Update a spacefarer's stardust collection and suit color
+PATCH {{service}}/Spacefarers({{spacefarerId}})
+Authorization: Basic alice
+Content-Type: application/json
+
+{
+  "stardustCollection": 250,
+  "spaceSuitColor": "silver"
+}
+
+### Delete a spacefarer
+DELETE {{service}}/Spacefarers({{spacefarerId}})
+Authorization: Basic alice
