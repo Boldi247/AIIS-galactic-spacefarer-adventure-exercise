@@ -5,7 +5,7 @@ const EMAIL_FROM = 'onboarding@resend.dev'
 
 /**
  * Sends an email notification to a spacefarer.
- * Temporarily, this function logs the email content to the console instead of sending an actual email.
+ * If the RESEND_API_KEY environment variable is not set, the notification will be logged to the console instead of being sent.
  *
  * @param {Object} spacefarer - The spacefarer to notify.
  */
