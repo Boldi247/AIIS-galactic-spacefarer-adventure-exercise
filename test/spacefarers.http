@@ -1,7 +1,7 @@
 ### Variables
 @host = http://localhost:4004
 @service = {{host}}/odata/v4/spacefarer
-@spacefarerId = 23319241-849d-466e-83d7-10f76b50ed00
+@spacefarerId = af9dcb0f-b832-404f-8cf3-4a102d69c5a4
 
 ### Get all spacefarers
 GET {{service}}/Spacefarers

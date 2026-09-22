@@ -10,6 +10,12 @@
     "editor.defaultFormatter": "SAPSE.vscode-cds"
   },
 
+  // Overrides the user's global "[javascript]" default formatter (set to
+  // ESLint), which otherwise wins over the setting above for JS files.
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true
 }

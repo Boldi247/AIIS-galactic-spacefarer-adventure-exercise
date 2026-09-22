@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "@sap/cds": "^10"
+    "@sap/cds": "^10",
+    "resend": "^6.28.1"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^3.1.1",
