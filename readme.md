@@ -1,22 +1,20 @@
-# Getting Started
+# AIIS Galactic Spacefarer Adventure Exercise
 
-Welcome to your new CAP project.
+This is my solution for the AIIS take-home exercise for the full-stack developer role. I enjoyed working on this project and exploring the SAP CAP framework, and the small dive into Fiori FE development.
 
-It contains these folders and files, following our recommended project layout:
+## Testing the application
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+### Running the application
 
-## Next Steps
+Please run `npm install` to install the dependencies, and then run `cds watch` to start the application. You can access the application at `http://localhost:4004`.
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+### Important environment variables, mock users
 
-## Learn More
+Please keep in mind, that I integrated Resend for sending emails (to congratulate new spacefarers on their journey). You will (optionally) need to set the `RESEND_API_KEY` environment variable in order to send emails. You can get a free API key from [Resend](https://resend.com/) with a fully free account.
+If this API key is not set, the application will still work, but the email sending functionality will be disabled - a simple console log will be printed instead.
 
-Learn more at <https://cap.cloud.sap>.
+As the application is protected by authentication, you can use the following mock users to log in:
+
+- Username: `y-farer`, Password: `y-farer` (from Planet Y)
+- Username: `x-farer`, Password: `x-farer` (from Planet X)
+- Username: `admin`, Password: `admin` (admin privileges, can see all spacefarers, regardless of their planet)
