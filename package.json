@@ -26,5 +26,38 @@
   ],
   "sapux": [
     "app/spacefarers"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "x-farer": {
+            "password": "x-farer",
+            "roles": [
+              "spacefarer"
+            ],
+            "attr": {
+              "planet": "Planet X"
+            }
+          },
+          "y-farer": {
+            "password": "y-farer",
+            "roles": [
+              "spacefarer"
+            ],
+            "attr": {
+              "planet": "Planet Y"
+            }
+          },
+          "admin": {
+            "password": "admin",
+            "roles": [
+              "admin"
+            ]
+          }
+        }
+      }
+    }
+  }
 }
