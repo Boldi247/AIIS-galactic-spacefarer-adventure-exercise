@@ -41,4 +41,20 @@ export default cds.service.impl(function () {
       console.error('Failed to send cosmic email notification: ', error.message)
     }
   })
+
+  //Validate planet on every write, make sure only those spacefarers can be created who share the same planet with the logged in user.
+  this.before('CREATE', Spacefarers, req => {
+    if (req.user.is('admin')) return
+    const { planet } = req.user.attr
+    if (isNil(planet)) return req.reject({ code: 403, message: 'Your home planet is unknown.' })
+
+    if (req.data.originPlanet !== planet)
+      req.error({ code: 403, message: `You can only enlist spacefarers from ${planet}.`, target: 'originPlanet' })
+  })
+
+  this.before('UPDATE', Spacefarers, req => {
+    if (req.user.is('admin')) return
+    if ('originPlanet' in req.data && req.data.originPlanet !== req.user.attr.planet)
+      req.error({ code: 403, message: 'A spacefarer cannot be relocated to another planet.', target: 'originPlanet' })
+  })
 })
