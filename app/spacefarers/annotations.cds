@@ -60,13 +60,21 @@ annotate service.Spacefarers with @(
     ],
     UI.SelectionFields           : [
         originPlanet,
+        stardustCollection,
+        wormholeNavigationSkill,
         spaceSuitColor,
         department.name,
         position.title,
         position.level,
-        stardustCollection,
-        wormholeNavigationSkill
-    ]
+    ],
+    UI.HeaderInfo : {
+        TypeName : '',
+        TypeNamePlural : '',
+        Title : {
+            $Type : 'UI.DataField',
+            Value : name,
+        },
+    },
 );
 
 annotate service.Spacefarers with {
