@@ -6,15 +6,15 @@
 
 ### Get all spacefarers
 GET {{service}}/Spacefarers
-Authorization: Basic alice
+Authorization: Basic admin:admin
 
 ### Get a single spacefarer by ID
 GET {{service}}/Spacefarers({{spacefarerId}})
-Authorization: Basic alice
+Authorization: Basic admin:admin
 
 ### Create a new spacefarer
 POST {{service}}/Spacefarers
-Authorization: Basic alice
+Authorization: Basic admin:admin
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 ### Update a spacefarer's stardust collection and suit color
 PATCH {{service}}/Spacefarers({{spacefarerId}})
-Authorization: Basic alice
+Authorization: Basic admin:admin
 Content-Type: application/json
 
 {
@@ -38,4 +38,4 @@ Content-Type: application/json
 
 ### Delete a spacefarer
 DELETE {{service}}/Spacefarers({{spacefarerId}})
-Authorization: Basic alice
+Authorization: Basic admin:admin
