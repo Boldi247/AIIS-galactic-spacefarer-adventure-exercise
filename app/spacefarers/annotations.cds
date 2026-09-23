@@ -108,3 +108,9 @@ annotate service.Spacefarers with {
         ],
     }
 };
+
+annotate service.Spacefarers with @cds.search: {
+    name,
+    stardustCollection,
+    spaceSuitColor
+}
