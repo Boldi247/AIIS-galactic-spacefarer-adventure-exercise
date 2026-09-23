@@ -6,33 +6,34 @@ import { isValidEmail } from './lib/validators.js'
 export default cds.service.impl(function () {
   const { Spacefarers } = this.entities
 
-  this.before(['CREATE', 'SAVE'], Spacefarers, req => {
+  // Validation for every write
+  this.before(['CREATE', 'UPDATE'], Spacefarers, req => {
     const s = req.data
 
-    if (!s.email || !isValidEmail(s.email))
-      return req.reject({ code: 400, message: 'Invalid email address!', target: 'email' })
+    if ('email' in s && !isValidEmail(s.email))
+      req.error({ code: 400, message: 'Invalid email address!', target: 'email' })
 
-    /**
-     * Spacefarers are prepared for their journey:
-     * If they lack the wormhole navigation skill, they are given a basic level of 1.
-     */
     if (s.wormholeNavigationSkill > 5 || s.wormholeNavigationSkill < 0)
-      return req.reject({
+      req.error({
         code: 400,
         message: 'Wormhole navigation skill must be between 0 and 5!',
         target: 'wormholeNavigationSkill',
       })
-    if (isNil(s.wormholeNavigationSkill) || s.wormholeNavigationSkill === 0) s.wormholeNavigationSkill = 1
 
     if (s.stardustCollection < 0)
-      return req.reject({ code: 400, message: 'Stardust collection cannot be negative!', target: 'stardustCollection' })
-    if (isNil(s.stardustCollection)) s.stardustCollection = 0
+      req.error({ code: 400, message: 'Stardust collection cannot be negative!', target: 'stardustCollection' })
+  })
 
-    // Welcome the new spacefarer with a small stardust collection to start their journey.
+  // Preparation for the journey for the spacefarer only after they are created.
+  this.before('CREATE', Spacefarers, req => {
+    const s = req.data
+    if (isNil(s.wormholeNavigationSkill) || s.wormholeNavigationSkill === 0) s.wormholeNavigationSkill = 1
+    if (isNil(s.stardustCollection)) s.stardustCollection = 0
     s.stardustCollection += 100
   })
 
-  this.after(['CREATE', 'SAVE'], Spacefarers, async (_, req) => {
+  //Send a notification email to the spacefarer only after they are created.
+  this.after(['CREATE'], Spacefarers, async (_, req) => {
     try {
       await sendEmailNotification(req.data)
     } catch (error) {
