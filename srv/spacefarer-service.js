@@ -6,27 +6,33 @@ import { isValidEmail } from './lib/validators.js'
 export default cds.service.impl(function () {
   const { Spacefarers } = this.entities
 
-  this.before('CREATE', Spacefarers, req => {
+  this.before(['CREATE', 'SAVE'], Spacefarers, req => {
     const s = req.data
 
-    if (!s.email || !isValidEmail(s.email)) return req.reject(400, 'Invalid email address!')
+    if (!s.email || !isValidEmail(s.email))
+      return req.reject({ code: 400, message: 'Invalid email address!', target: 'email' })
 
     /**
      * Spacefarers are prepared for their journey:
      * If they lack the wormhole navigation skill, they are given a basic level of 1.
      */
     if (s.wormholeNavigationSkill > 5 || s.wormholeNavigationSkill < 0)
-      return req.reject(400, 'Wormhole navigation skill must be between 0 and 5!')
+      return req.reject({
+        code: 400,
+        message: 'Wormhole navigation skill must be between 0 and 5!',
+        target: 'wormholeNavigationSkill',
+      })
     if (isNil(s.wormholeNavigationSkill) || s.wormholeNavigationSkill === 0) s.wormholeNavigationSkill = 1
 
-    if (s.stardustCollection < 0) return req.reject(400, 'Stardust collection cannot be negative!')
+    if (s.stardustCollection < 0)
+      return req.reject({ code: 400, message: 'Stardust collection cannot be negative!', target: 'stardustCollection' })
     if (isNil(s.stardustCollection)) s.stardustCollection = 0
 
     // Welcome the new spacefarer with a small stardust collection to start their journey.
     s.stardustCollection += 100
   })
 
-  this.after('CREATE', Spacefarers, async (_, req) => {
+  this.after(['CREATE', 'SAVE'], Spacefarers, async (_, req) => {
     try {
       await sendEmailNotification(req.data)
     } catch (error) {

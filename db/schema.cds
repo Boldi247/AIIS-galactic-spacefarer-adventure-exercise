@@ -26,3 +26,24 @@ entity Positions : cuid {
     title : String(100);
     level : Integer;
 }
+
+annotate galactic.Spacefarers with {
+    name                    @title: 'Name'              @mandatory;
+    email                   @title: 'Email'             @mandatory;
+    originPlanet            @title: 'Origin Planet'     @mandatory;
+    spaceSuitColor          @title: 'Space Suit Color'  @mandatory;
+    stardustCollection      @title: 'Stardust Collection';
+    wormholeNavigationSkill @title: 'Wormhole Navigation Skill';
+    department              @title: 'Department ID';
+    position                @title: 'Position ID';
+}
+
+annotate galactic.Departments with {
+    name        @title: 'Department Name';
+    spacefarers @title: 'Spacefarers';
+}
+
+annotate galactic.Positions with {
+    title @title: 'Position Title';
+    level @title: 'Position Level';
+}
