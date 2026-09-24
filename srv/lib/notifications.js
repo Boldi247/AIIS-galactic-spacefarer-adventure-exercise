@@ -25,7 +25,7 @@ export async function sendEmailNotification(spacefarer) {
     return
   }
 
-  const { data } = await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: EMAIL_FROM,
     to: spacefarer.email,
     subject: 'Welcome to the Galactic Spacefarer Adventure!',
@@ -43,6 +43,8 @@ export async function sendEmailNotification(spacefarer) {
       </div>
     `,
   })
+
+  if (error) throw new Error(error.message)
 
   return data
 }

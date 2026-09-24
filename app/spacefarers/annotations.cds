@@ -67,12 +67,12 @@ annotate service.Spacefarers with @(
         position.title,
         position.level,
     ],
-    UI.HeaderInfo : {
-        TypeName : '',
-        TypeNamePlural : '',
-        Title : {
-            $Type : 'UI.DataField',
-            Value : name,
+    UI.HeaderInfo                : {
+        TypeName      : 'Spacefarer',
+        TypeNamePlural: 'Spacefarers',
+        Title         : {
+            $Type: 'UI.DataField',
+            Value: name,
         },
     },
 );
